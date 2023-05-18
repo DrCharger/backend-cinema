@@ -59,11 +59,12 @@ export class GenreService {
 			genres.map(async (genre) => {
 				const moviesByGenre = await this.movieService.byGenres([genre._id])
 
+				const random = Math.floor(Math.random() * moviesByGenre.length)
 				const result: ICollection = {
 					_id: String(genre._id),
 					title: genre.name,
 					slug: genre.slug,
-					image: moviesByGenre[0].bigPoster || '',
+					image: moviesByGenre[random].bigPoster || '',
 				}
 
 				return result
